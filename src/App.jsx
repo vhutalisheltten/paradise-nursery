@@ -8,7 +8,7 @@ function Landing() {
   const navigate = useNavigate()
 
   return (
-    <main className="landing-page">
+    <main className="landing-page background-image">
       <section className="hero-panel">
         <div className="hero-copy">
           <p className="eyebrow">Welcome to Paradise Nursery</p>
