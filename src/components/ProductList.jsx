@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { addItem } from '../redux/CartSlice.jsx'
 import { plantCatalog } from '../data/plants.js'
+import Header from './Header.jsx'
 
 function ProductList() {
   const dispatch = useDispatch()
@@ -17,41 +18,44 @@ function ProductList() {
   }
 
   return (
-    <main className="page-content product-page">
-      <section className="page-intro">
-        <p className="eyebrow">Plant shop</p>
-        <h1>Browse our houseplants</h1>
-        <p>Choose from fresh, curated categories and add plants to your cart with one click.</p>
-      </section>
-
-      {grouped.map(({ category, plants }) => (
-        <section key={category} className="product-category">
-          <h2>{category}</h2>
-          <div className="product-grid">
-            {plants.map((plant) => {
-              const added = Boolean(cartItems[plant.id])
-              return (
-                <article key={plant.id} className="product-card">
-                  <img src={plant.image} alt={plant.name} />
-                  <div className="product-info">
-                    <h3>{plant.name}</h3>
-                    <p className="product-price">${plant.price.toFixed(2)}</p>
-                    <button
-                      type="button"
-                      className="button button-primary"
-                      onClick={() => handleAdd(plant)}
-                      disabled={added}
-                    >
-                      {added ? 'Added' : 'Add to Cart'}
-                    </button>
-                  </div>
-                </article>
-              )
-            })}
-          </div>
+    <div className="product-list-container">
+      <Header />
+      <main className="page-content product-page">
+        <section className="page-intro">
+          <p className="eyebrow">Plant shop</p>
+          <h1>Browse our houseplants</h1>
+          <p>Choose from fresh, curated categories and add plants to your cart with one click.</p>
         </section>
-      ))}
-    </main>
+
+        {grouped.map(({ category, plants }) => (
+          <section key={category} className="product-category">
+            <h2>{category}</h2>
+            <div className="product-grid">
+              {plants.map((plant) => {
+                const added = Boolean(cartItems[plant.id])
+                return (
+                  <article key={plant.id} className="product-card">
+                    <img src={plant.image} alt={plant.name} />
+                    <div className="product-info">
+                      <h3>{plant.name}</h3>
+                      <p className="product-price">${plant.price.toFixed(2)}</p>
+                      <button
+                        type="button"
+                        className="button button-primary"
+                        onClick={() => handleAdd(plant)}
+                        disabled={added}
+                      >
+                        {added ? 'Added' : 'Add to Cart'}
+                      </button>
+                    </div>
+                  </article>
+                )
+              })}
+            </div>
+          </section>
+        ))}
+      </main>
+    </div>
   )
 }
 
