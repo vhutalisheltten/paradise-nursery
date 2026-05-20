@@ -28,17 +28,17 @@ npm run dev
 
 ## Deploy to GitHub Pages
 
-1. Create a public GitHub repository.
+1. Create a public GitHub repository named `e-plantShopping`.
 2. Add the repository as the origin remote:
 
 ```bash
-git remote add origin https://github.com/<username>/<repository>.git
+git remote add origin https://github.com/vhutalisheltten/e-plantShopping.git
 ```
 
 3. Push the project to GitHub:
 
 ```bash
-git push -u origin master
+git push -u origin main
 ```
 
 4. Install dependencies if needed:
@@ -59,4 +59,6 @@ npm run deploy
 https://vhutalisheltten.github.io/paradise-nursery/
 ```
 
-Because the app uses `HashRouter`, it will work correctly on GitHub Pages without extra base path configuration.
+Your deployed site is already live at: https://vhutalisheltten.github.io/paradise-nursery/
+
+Because the app uses `HashRouter`, it works correctly on GitHub Pages without extra base path configuration.

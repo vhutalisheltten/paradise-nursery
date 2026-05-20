@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { incrementQuantity, decrementQuantity, removeItem } from '../redux/CartSlice.jsx'
+import { updateQuantity, removeItem } from '../redux/CartSlice.jsx'
 
 function CartItem({ item }) {
   const dispatch = useDispatch()
@@ -14,11 +14,11 @@ function CartItem({ item }) {
       </div>
       <div className="cart-item-controls">
         <div className="quantity-control">
-          <button type="button" onClick={() => dispatch(decrementQuantity(item.id))}>
+          <button type="button" onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }))}>
             −
           </button>
           <span>{item.quantity}</span>
-          <button type="button" onClick={() => dispatch(incrementQuantity(item.id))}>
+          <button type="button" onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))}>
             +
           </button>
         </div>

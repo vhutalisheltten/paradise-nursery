@@ -1,8 +1,13 @@
 {
-  "name": "paradise-nursery",
+  "name": "e-plantShopping",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://vhutalisheltten.github.io/paradise-nursery/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vhutalisheltten/paradise-nursery.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
