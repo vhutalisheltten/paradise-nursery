@@ -28,14 +28,26 @@ npm run dev
 
 ## Deploy to GitHub Pages
 
-1. Create a public GitHub repository and push this project.
-2. Install dependencies if needed:
+1. Create a public GitHub repository.
+2. Add the repository as the origin remote:
+
+```bash
+git remote add origin https://github.com/<username>/<repository>.git
+```
+
+3. Push the project to GitHub:
+
+```bash
+git push -u origin master
+```
+
+4. Install dependencies if needed:
 
 ```bash
 npm install
 ```
 
-3. Deploy the production build to GitHub Pages:
+5. Deploy the production build to GitHub Pages:
 
 ```bash
 npm run deploy
