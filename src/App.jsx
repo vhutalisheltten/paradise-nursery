@@ -1,30 +1,7 @@
-import { Link, NavLink, Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, Route, Routes } from "react-router-dom";
 import AboutUs from "./AboutUs.jsx";
 import CartItem from "./CartItem.jsx";
 import ProductList from "./ProductList.jsx";
-import { selectCartTotalQuantity } from "./CartSlice.jsx";
-
-function Header() {
-  const cartQuantity = useSelector(selectCartTotalQuantity);
-
-  return (
-    <header className="site-header">
-      <Link className="brand-link" to="/">
-        <span className="brand-mark">PN</span>
-        <span>Paradise Nursery</span>
-      </Link>
-      <nav className="main-nav" aria-label="Main navigation">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/plants">Plants</NavLink>
-        <NavLink to="/cart" className="cart-link" aria-label={`Cart with ${cartQuantity} items`}>
-          <span className="cart-icon" aria-hidden="true">🛒</span>
-          <span className="cart-count">{cartQuantity}</span>
-        </NavLink>
-      </nav>
-    </header>
-  );
-}
 
 function LandingPage() {
   return (
@@ -45,24 +22,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route
-        path="/plants"
-        element={
-          <>
-            <Header />
-            <ProductList />
-          </>
-        }
-      />
-      <Route
-        path="/cart"
-        element={
-          <>
-            <Header />
-            <CartItem />
-          </>
-        }
-      />
+      <Route path="/plants" element={<ProductList />} />
+      <Route path="/cart" element={<CartItem />} />
     </Routes>
   );
 }
