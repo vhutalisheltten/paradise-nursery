@@ -3,16 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   removeItem,
   selectCartItems,
-  selectCartTotalCost,
   selectCartTotalQuantity,
   updateQuantity
 } from "./CartSlice.jsx";
+
+function calculateTotalAmount(cartItems) {
+  return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+}
 
 function CartItem() {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
   const totalQuantity = useSelector(selectCartTotalQuantity);
-  const totalCost = useSelector(selectCartTotalCost);
+  const totalCost = calculateTotalAmount(cartItems);
+
+  const handleDecreaseQuantity = (item) => {
+    if (item.quantity <= 1) {
+      dispatch(removeItem(item.id));
+    } else {
+      dispatch(updateQuantity({ id: item.id, change: -1 }));
+    }
+  };
 
   return (
     <main className="page-shell cart-page">
@@ -46,7 +57,7 @@ function CartItem() {
                   <p>Item total: ${(item.price * item.quantity).toFixed(2)}</p>
                 </div>
                 <div className="quantity-controls" aria-label={`${item.name} quantity controls`}>
-                  <button type="button" onClick={() => dispatch(updateQuantity({ id: item.id, change: -1 }))}>
+                  <button type="button" onClick={() => handleDecreaseQuantity(item)}>
                     -
                   </button>
                   <span>{item.quantity}</span>
