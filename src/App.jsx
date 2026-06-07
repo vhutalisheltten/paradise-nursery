@@ -1,45 +1,70 @@
-import './App.css'
-import { HashRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
-import Header from './components/Header.jsx'
-import ProductList from './components/ProductList.jsx'
-import Cart from './components/Cart.jsx'
+import { Link, NavLink, Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
+import AboutUs from "./AboutUs.jsx";
+import CartItem from "./CartItem.jsx";
+import ProductList from "./ProductList.jsx";
+import { selectCartTotalQuantity } from "./CartSlice.jsx";
 
-function Landing() {
-  const navigate = useNavigate()
+function Header() {
+  const cartQuantity = useSelector(selectCartTotalQuantity);
 
   return (
-    <main className="landing-page background-image">
-      <section className="hero-panel">
-        <div className="hero-copy">
-          <p className="eyebrow">Welcome to Paradise Nursery</p>
-          <h1>Bring home a greener space today</h1>
-          <p>
-            Explore our curated indoor plant collection and add beautiful houseplants to your cart.
-            Click Get Started to begin shopping.
-          </p>
-          <button className="button button-primary" type="button" onClick={() => navigate('/plants')}>
-            Get Started
-          </button>
-        </div>
+    <header className="site-header">
+      <Link className="brand-link" to="/">
+        <span className="brand-mark">PN</span>
+        <span>Paradise Nursery</span>
+      </Link>
+      <nav className="main-nav" aria-label="Main navigation">
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/plants">Plants</NavLink>
+        <NavLink to="/cart" className="cart-link" aria-label={`Cart with ${cartQuantity} items`}>
+          <span className="cart-icon" aria-hidden="true">🛒</span>
+          <span className="cart-count">{cartQuantity}</span>
+        </NavLink>
+      </nav>
+    </header>
+  );
+}
+
+function LandingPage() {
+  return (
+    <main className="landing-page">
+      <section className="landing-content">
+        <p className="eyebrow">Indoor plant specialists</p>
+        <h1>Paradise Nursery</h1>
+        <AboutUs />
+        <Link className="primary-button" to="/plants">
+          Get Started
+        </Link>
       </section>
     </main>
-  )
+  );
 }
 
 function App() {
   return (
-    <HashRouter>
-      <div className="app-shell">
-        <Header />
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/plants" element={<ProductList />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </div>
-    </HashRouter>
-  )
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route
+        path="/plants"
+        element={
+          <>
+            <Header />
+            <ProductList />
+          </>
+        }
+      />
+      <Route
+        path="/cart"
+        element={
+          <>
+            <Header />
+            <CartItem />
+          </>
+        }
+      />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
