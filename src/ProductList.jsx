@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, selectCartItems } from "./CartSlice.jsx";
+import { addItem, selectCartItems } from "./CartSlice.jsx";
 
 const plantCategories = [
   {
@@ -84,7 +84,7 @@ function ProductList() {
                       type="button"
                       className="secondary-button"
                       disabled={inCart}
-                      onClick={() => dispatch(addToCart(plant))}
+                      onClick={() => dispatch(addItem(plant))}
                     >
                       {inCart ? "Added to Cart" : "Add to Cart"}
                     </button>

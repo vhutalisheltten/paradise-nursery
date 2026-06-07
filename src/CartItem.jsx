@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  decreaseQuantity,
-  deleteItem,
-  increaseQuantity,
+  removeItem,
   selectCartItems,
   selectCartTotalCost,
-  selectCartTotalQuantity
+  selectCartTotalQuantity,
+  updateQuantity
 } from "./CartSlice.jsx";
 
 function CartItem() {
@@ -47,18 +46,18 @@ function CartItem() {
                   <p>Item total: ${(item.price * item.quantity).toFixed(2)}</p>
                 </div>
                 <div className="quantity-controls" aria-label={`${item.name} quantity controls`}>
-                  <button type="button" onClick={() => dispatch(decreaseQuantity(item.id))}>
+                  <button type="button" onClick={() => dispatch(updateQuantity({ id: item.id, change: -1 }))}>
                     -
                   </button>
                   <span>{item.quantity}</span>
-                  <button type="button" onClick={() => dispatch(increaseQuantity(item.id))}>
+                  <button type="button" onClick={() => dispatch(updateQuantity({ id: item.id, change: 1 }))}>
                     +
                   </button>
                 </div>
                 <button
                   type="button"
                   className="delete-button"
-                  onClick={() => dispatch(deleteItem(item.id))}
+                  onClick={() => dispatch(removeItem(item.id))}
                 >
                   Delete
                 </button>
